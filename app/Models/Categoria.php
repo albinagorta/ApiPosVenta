@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Categoria extends Model
+use App\models\Base;
+class Categoria extends Base
 {
     use HasFactory;
     protected $fillable = ["nombre" , "fh_crea", "fh_update", "user_crea", "user_update", "in_estado"];
