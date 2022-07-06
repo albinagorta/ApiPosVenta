@@ -1,7 +1,7 @@
 {
-    "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.",
-    "The :attribute must contain at least one number.": "The :attribute must contain at least one number.",
-    "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.",
-    "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.",
-    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute."
+    "El :attribute debe contener al menos una letra.": "El :attribute debe contener al menos una letra.",
+    "El :attribute debe contener al menos un número.": "El :attribute debe contener al menos un número.",
+    "El :attribute debe contener al menos un símbolo.": "El :attribute debe contener al menos un símbolo.",
+    "El :attribute debe contener al menos una letra mayúscula y una minúscula.": "El :attribute debe contener al menos una letra mayúscula y una minúscula.",
+    "El :attribute dado ha aparecido en una fuga de datos. Elija un :attribute diferente.": "El :attribute dado ha aparecido en una fuga de datos. Elija un :attribute diferente."
 }

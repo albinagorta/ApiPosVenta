@@ -2,63 +2,74 @@
 
 namespace App\Http\Controllers\api\V1;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class UserController extends Controller
+use App\models\User;
+use App\Http\Controllers\api\BaseController;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\User as UserResource;
+class UserController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $resp = User::all();
+
+        return $this->sendResponse(UserResource::collection($resp), 'Usuarios listado con éxito.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        
+        
+        $validator = Validator::make($input, [
+            'nombre' => 'required',
+            'rol' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validación de error', $validator->errors());       
+        }
+
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        return $this->sendResponse($user, 'Usuario creado con éxito.');
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        if (is_null($user)) {
+            return $this->sendError('Usuario no encontrado.');
+        }
+   
+        return $this->sendResponse($user, 'Usuario listado con éxito.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+   
+        $validator = Validator::make($input, [
+            'nombre' => 'required',
+            'rol' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required'
+        ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validación de error', $validator->errors());       
+        }
+        $user = User::find($id);   
+        $user->nombre = $input['nombre'];
+        $user->rol = $input['rol'];
+        $user->email = $input['email'];
+        $user->password =bcrypt($input['password']);
+        $user->save();
+   
+        return $this->sendResponse($user, 'Usuario actualizado con éxito.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
