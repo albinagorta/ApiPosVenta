@@ -14,8 +14,8 @@ class User extends JsonResource
             'nombre' => $this->nombre,
             'rol' => $this->rol,
             'email' => $this->email,
-            'created_at' => $this->created_at->format('d/m/Y'),
-            'updated_at' => $this->updated_at->format('d/m/Y'),
+            'fh_crea' => $this->created_at->format('Y-m-d H:i:s'),
+            'fh_update' => $this->updated_at->format('Y-m-d H:i:s'),
         ];
         
         //return parent::toArray($request);

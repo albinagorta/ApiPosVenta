@@ -34,7 +34,8 @@ class UserController extends BaseController
 
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        return $this->sendResponse($user, 'Usuario creado con éxito.');
+
+        return $this->sendResponse(new UserResource($user), 'Usuario creado con éxito.');
         
     }
 
@@ -45,7 +46,7 @@ class UserController extends BaseController
             return $this->sendError('Usuario no encontrado.');
         }
    
-        return $this->sendResponse($user, 'Usuario listado con éxito.');
+        return $this->sendResponse(new UserResource($user), 'Usuario listado con éxito.');
     }
 
     public function update(Request $request, $id)
@@ -69,7 +70,7 @@ class UserController extends BaseController
         $user->password =bcrypt($input['password']);
         $user->save();
    
-        return $this->sendResponse($user, 'Usuario actualizado con éxito.');
+        return $this->sendResponse(new UserResource($user), 'Usuario actualizado con éxito.');
     }
 
 }
