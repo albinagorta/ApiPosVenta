@@ -18,7 +18,7 @@ class ProductoController extends BaseController
         $per_page = ($request->input('per_page'))?$request->input('per_page'):2;
         $pro = Producto::with('categoria','usuario_crea', 'usuario_update')->paginate($per_page);
         //die(json_encode($pro));
-        return $this->sendResponse(($pro), 'Producto listado con éxito.');
+        return $this->sendResponse($pro, 'Producto listado con éxito.');
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class ProductoController extends BaseController
             return $this->sendError('Producto no encontrado.');
         }
    
-        return $this->sendResponse($pro, 'Producto listado con éxito.');
+        return $this->sendResponse(new ProductoResource($pro), 'Producto listado con éxito.');
     }
 
     public function update(Request $request,$id,)
