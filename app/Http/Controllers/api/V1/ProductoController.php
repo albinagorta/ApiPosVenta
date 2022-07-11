@@ -13,11 +13,12 @@ class ProductoController extends BaseController
 {
     const destinationPath = 'image/productos/';
 
-    public function index()
+    public function index(Request $request)
     {
-        $pro = Producto::paginate(4);
+        $per_page = ($request->input('per_page'))?$request->input('per_page'):2;
+        $pro = Producto::with('categoria','usuario_crea', 'usuario_update')->paginate($per_page);
         //die(json_encode($pro));
-        return $this->sendResponse(ProductoResource::collection($pro), 'Producto listado con éxito.');
+        return $this->sendResponse(($pro), 'Producto listado con éxito.');
     }
 
     public function store(Request $request)
