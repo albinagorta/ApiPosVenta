@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Detalle_venta extends Model
+use App\models\Base;
+use App\models\Producto;
+class Detalle_venta extends Base
 {
     use HasFactory;
     protected $fillable = [
@@ -15,5 +15,10 @@ class Detalle_venta extends Model
         "preciou" ,
         "subtotal" 
     ];
+
+    public function producto()
+    {
+      return $this->belongsTo(Producto::class, 'id_producto');
+    }
     
 }

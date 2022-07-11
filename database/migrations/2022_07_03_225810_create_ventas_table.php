@@ -25,6 +25,11 @@ return new class extends Migration
             $table->unsignedBigInteger('user_crea');
             $table->foreign('user_crea')->references('id')->on('users');
 
+            $table->dateTime('fh_update')->nullable();
+            // fk users
+            $table->unsignedBigInteger('user_update')->nullable();
+            $table->foreign('user_update')->references('id')->on('users');
+
             $table->decimal('descuento',10,2);
             $table->decimal('impuesto',10,2);
             $table->decimal('neto',20,2);

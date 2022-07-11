@@ -8,15 +8,16 @@ use App\Http\Controllers\api\BaseController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Http\Resources\Producto as ProductoResource;
 class ProductoController extends BaseController
 {
     const destinationPath = 'image/productos/';
 
     public function index()
     {
-        $pro = Producto::all();
-
-        return $this->sendResponse($pro, 'Producto listado con éxito.');
+        $pro = Producto::paginate(4);
+        //die(json_encode($pro));
+        return $this->sendResponse(ProductoResource::collection($pro), 'Producto listado con éxito.');
     }
 
     public function store(Request $request)
@@ -110,4 +111,7 @@ class ProductoController extends BaseController
             return '';
         }
     }
+
+
+
 }

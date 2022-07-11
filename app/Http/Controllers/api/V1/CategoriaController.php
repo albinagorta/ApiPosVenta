@@ -7,6 +7,7 @@ use App\models\Categoria;
 use App\Http\Controllers\api\BaseController;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\Categoria as CategoriaResource;
 //class CategoriaController extends Controller
 class CategoriaController extends BaseController
 {
@@ -15,7 +16,7 @@ class CategoriaController extends BaseController
     {
         $cat = Categoria::all();
 
-        return $this->sendResponse($cat, 'Categorias listado con éxito.');
+        return $this->sendResponse(CategoriaResource::collection($cat), 'Categorias listado con éxito.');
     }
 
     public function store(Request $request)

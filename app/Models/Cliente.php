@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use App\models\Base;
 
-class Cliente extends Model
+class Cliente extends Base
 {
     use HasFactory;
     protected $fillable = [
@@ -21,4 +21,14 @@ class Cliente extends Model
         "user_update", 
         "in_estado"
     ];
+
+    public function usuario_crea()
+    {
+      return $this->belongsTo(User::class, 'user_crea', 'id');
+    }
+
+    public function usuario_update()
+    {
+      return $this->belongsTo(User::class, 'user_update', 'id');
+    }
 }
